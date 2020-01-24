@@ -90,7 +90,9 @@ class Schedule:
             # Button has been pressed
             filename = askopenfilename()
             print(filename)
+            self.output_text(filename)
 
 root = Tk()
+root.attributes('-zoomed', True)
 gui = Schedule(root)
 root.mainloop()
