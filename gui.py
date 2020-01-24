@@ -16,7 +16,7 @@ class Schedule:
     def __init__(self, master):
         self.master = master
         master.title("CO2 Capture Optimization")
-        master.geometry("800x600+200+150")
+        master.geometry("350x200+650+250")
 
         # Instance variables
         self.term = StringVar()
@@ -30,7 +30,7 @@ class Schedule:
         self.term_lbl.grid(row=1, column=1, sticky=W)
 
         # Output text area
-        self.output = Text(master, height=10, width=30, yscrollcommand=set(), highlightbackground="black", highlightthickness=5)
+        self.output = Text(master, height=10, width=30, yscrollcommand=set(), highlightbackground="black", highlightthickness=2)
         self.output.grid(row=2, column=1, rowspan=2, columnspan=1)
         self.output.config(state=DISABLED)
 
