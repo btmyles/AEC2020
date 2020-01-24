@@ -69,7 +69,7 @@ class Schedule:
             results.update({self.trim_filename(self.filenames[i]):readfile(file)})
             i = i + 1
         
-        openwindow(root)
+        openwindow(root, results)
         openwindow2(root, results)
 
     def add(self):

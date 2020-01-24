@@ -15,10 +15,18 @@ def openwindow2(root, results):
         x.append(key)
     print(x)
     print(y)
+    maxcity = ''
+    k = 0
+    l = 0
+    maximum = max(y)
+    ind = y.index(maximum)
+    maxcity = x[ind]
+    print(maximum)
+    print(maxcity)
     
     
     sum = 0
-    file = open('Halifax.txt', 'r')
+    file = open(maxcity, 'r')
     count, arr = 0, []
     for line in file.readlines():
         count += 1
