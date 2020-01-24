@@ -27,20 +27,20 @@ class Schedule:
 
         # Instructions label
         self.term_lbl = Label(master, text="Please select input files for cities")
-        self.term_lbl.grid(row=0, column=1, sticky=W)
+        self.term_lbl.grid(row=1, column=1, sticky=W)
+
+        # Output text area
+        self.output = Text(master, height=10, width=30, yscrollcommand=set(), highlightbackground="black", highlightthickness=5)
+        self.output.grid(row=2, column=1, rowspan=2, columnspan=1)
+        self.output.config(state=DISABLED)
 
         # "Add" button
         self.add_butt = ttk.Button(master, text="Add", command=self.add)
-        self.add_butt.grid(row=1, column=1, sticky=W)
+        self.add_butt.grid(row=2, column=2, sticky=W)
 
         # "Done" button
         self.done_butt = ttk.Button(master, text="Done", command=self.done)
-        self.done_butt.grid(row=1, column=2, sticky=W)
-
-        # Output text area
-        self.output = Text(master, height=10, width=20)
-        self.output.grid(row=2, column=1, columnspan=2)
-        self.output.config(state=DISABLED)
+        self.done_butt.grid(row=3, column=2, sticky=W)
 
         # Set grid spacing
         col_count, row_count = master.grid_size()
