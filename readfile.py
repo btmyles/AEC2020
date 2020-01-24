@@ -15,6 +15,6 @@ def readfile(filename):
             x = [(fname[i], fname[i+1]) for i in range(0, columns*2, 2)]
             arr.append(x)
 
-    return arr
+    configComp(arr)
 
-print(readfile("SJs.txt"))
+#print(readfile("SJs.txt"))
