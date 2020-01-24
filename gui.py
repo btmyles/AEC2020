@@ -8,9 +8,10 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from tkinter.filedialog import askopenfilename
+import os
+from readfile import readfile
 
 class Schedule:
-
 
     def __init__(self, master):
         self.master = master
@@ -22,75 +23,54 @@ class Schedule:
         self.location = StringVar()
         self.term_selected = False
         self.location_selected = False
+        self.filenames = set()
 
-        # Term
-        self.term_lbl = Label(master, text="Term:")
-        self.term_lbl.grid(row=0, column=0, sticky=W)
+        # Instructions label
+        self.term_lbl = Label(master, text="Please select input files for cities")
+        self.term_lbl.grid(row=0, column=1, sticky=W)
 
-        self.t1 = ttk.Radiobutton(master, text="Summer 2019", variable=self.term, command=self.t_selected, value="2019/SM")
-        self.t2 = ttk.Radiobutton(master, text="Fall 2019", variable=self.term, command=self.t_selected, value="2019/FA")
-        self.t3 = ttk.Radiobutton(master, text="Winter 2020", variable=self.term, command=self.t_selected, value="2020/WI")
-        self.t1.grid(row=0, column=1, sticky=W)
-        self.t2.grid(row=1, column=1, sticky=W)
-        self.t3.grid(row=2, column=1, sticky=W)
+        # "Add" button
+        self.add_butt = ttk.Button(master, text="Add", command=self.add)
+        self.add_butt.grid(row=1, column=1, sticky=W)
 
-        # Location
-        self.location_lbl = Label(master, text="Location:")
-        self.location_lbl.grid(row=4, column=0, sticky=W)
+        # "Done" button
+        self.done_butt = ttk.Button(master, text="Done", command=self.done)
+        self.done_butt.grid(row=1, column=2, sticky=W)
 
-        self.l1 = ttk.Radiobutton(master, text="Saint John", variable=self.location, command=self.l_selected, value="SJ")
-        self.l2 = ttk.Radiobutton(master, text="Fredericton", variable=self.location, command=self.l_selected, value="FR")
-        self.l1.grid(row=4, column=1, sticky=W)
-        self.l2.grid(row=5, column=1, sticky=W)
-
-        # Course names
-        self.entry_lbl = Label(master, text="Course IDs:")
-        self.entry_lbl.grid(row=7, column=0, sticky=W)
-
-        self.entries = []
-        for i in range(6):
-            self.entries.append(Entry(master))
-            self.entries[i].grid(row=i+7, column=1, sticky=W)
-
-        # Schedule Button
-        self.butt = ttk.Button(master, text="Find Courses", command=self.run)
-        self.butt.grid(row=14, column=0, sticky=W)
-
-        # Output
-        self.output = Text(master)
-        self.output.grid(row=2, column=3, rowspan=12, columnspan=3)
+        # Output text area
+        self.output = Text(master, height=10, width=20)
+        self.output.grid(row=2, column=1, columnspan=2)
         self.output.config(state=DISABLED)
 
         # Set grid spacing
         col_count, row_count = master.grid_size()
         for col in range(col_count):
-            master.grid_columnconfigure(col, minsize=20)
+            master.grid_columnconfigure(col, minsize=10)
 
         for row in range(row_count):
-            master.grid_rowconfigure(row, minsize=20)
+            master.grid_rowconfigure(row, minsize=10)
 
     def output_text(self, out):
         self.output.config(state=NORMAL)
         self.output.insert(END, out)
         self.output.config(state=DISABLED)
 
-    def t_selected(self):
-        self.term_selected = True
+    def trim_filename(self, path):
+        return os.path.basename(path)
 
-    def l_selected(self):
-        self.location_selected = True
+    def done(self):
+        for file in self.filenames:
+            readfile(file)
 
-    def run(self):
-        # Verify that a term and location have been selected
-        if not self.term_selected:
-            messagebox.showerror("Error", "Select a term")
-        elif not self.location_selected:
-            messagebox.showerror("Error", "Select a location")
+    def add(self):
+        # Button has been pressed
+        filename = askopenfilename()
+        if filename not in self.filenames:
+            self.filenames.add(filename)
+            self.output_text(self.trim_filename(filename))
+            self.output_text("\n")
         else:
-            # Button has been pressed
-            filename = askopenfilename()
-            print(filename)
-            self.output_text(filename)
+            messagebox.showerror("Error", "File has already been added")
 
 root = Tk()
 #root.attributes('-zoomed', True)
