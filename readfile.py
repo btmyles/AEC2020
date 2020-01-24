@@ -1,5 +1,7 @@
 
 import re
+from configComp import configComp
+
 def readfile(filename):
     file = open(filename, 'r')
     count, arr = 0, []
