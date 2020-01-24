@@ -4,7 +4,7 @@ def configComp(map):
     minRed = -1
     minArr = []
     for i in configs:
-        (tempCost,tempRed,tempArr[]) = minMax(map, configs)
+        (tempCost,tempRed,tempArr) = minMax(map, configs)
         if minCost == -1 or minRed == -1:
             minCost = tempCost
             minRed = tempRed

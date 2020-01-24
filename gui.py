@@ -10,6 +10,8 @@ from tkinter import messagebox
 from tkinter.filedialog import askopenfilename
 import os
 from readfile import readfile
+from results import openwindow
+from graph import openwindow2
 
 class Schedule:
 
@@ -23,7 +25,7 @@ class Schedule:
         self.location = StringVar()
         self.term_selected = False
         self.location_selected = False
-        self.filenames = set()
+        self.filenames = []
 
         # Instructions label
         self.term_lbl = Label(master, text="Please select input files for cities")
@@ -59,14 +61,22 @@ class Schedule:
         return os.path.basename(path)
 
     def done(self):
+        # Dictionary containing {filename:configuration} pairs
+        results = {}
+
+        i=0
         for file in self.filenames:
-            readfile(file)
+            results.update({self.filenames[i]:readfile(file)})
+            i = i + 1
+        
+        openwindow(root)
+        openwindow2(root, results)
 
     def add(self):
         # Button has been pressed
         filename = askopenfilename()
         if filename not in self.filenames:
-            self.filenames.add(filename)
+            self.filenames.append(filename)
             self.output_text(self.trim_filename(filename))
             self.output_text("\n")
         else:
