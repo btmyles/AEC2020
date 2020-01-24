@@ -9,6 +9,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from tkinter.filedialog import askopenfilename
 import os
+from readfile import readfile
 
 class Schedule:
 
@@ -58,7 +59,8 @@ class Schedule:
         return os.path.basename(path)
 
     def done(self):
-        pass
+        for file in self.filenames:
+            readfile(file)
 
     def add(self):
         # Button has been pressed
