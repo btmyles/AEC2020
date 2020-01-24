@@ -93,6 +93,6 @@ class Schedule:
             self.output_text(filename)
 
 root = Tk()
-root.attributes('-zoomed', True)
+#root.attributes('-zoomed', True)
 gui = Schedule(root)
 root.mainloop()
