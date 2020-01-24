@@ -66,7 +66,7 @@ class Schedule:
 
         i=0
         for file in self.filenames:
-            results.update({self.filenames[i]:readfile(file)})
+            results.update({self.trim_filename(self.filenames[i]):readfile(file)})
             i = i + 1
         
         openwindow(root)

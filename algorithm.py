@@ -172,7 +172,6 @@ def MinMax(PPMmap, conf):
                                     t_co2 = co2 + co22 + co23 + co24
 
                                     if best == None or best[1] < t_co2:
-                                        print("replaced!", t_co2)
                                         best = (t_cost, t_co2)
                                         indexes = [(valids[i][0], valids[i][1], conf[0].name), (valids[j][0], valids[j][1], conf[1].name), (valids[k][0], valids[k][1], conf[2].name), (valids[l][0], valids[l][1], conf[3].name)]
 

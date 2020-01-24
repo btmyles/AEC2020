@@ -16,7 +16,10 @@ def readfile(filename):
             fname = line.rstrip().split(',') #using rstrip to remove the \n
             x = [(float(fname[i]), int(fname[i+1])) for i in range(0, columns*2, 2)]
             arr.append(x)
-
-    configComp(arr)
+    arr = arr[2:-2]
+    for i in range(len(arr)):
+        arr[i] = arr[i][2:-2]
+    print(arr)
+    return configComp(arr)
 
 #print(readfile("SJs.txt"))
