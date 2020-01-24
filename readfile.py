@@ -14,7 +14,7 @@ def readfile(filename):
 
         if count > 4:
             fname = line.rstrip().split(',') #using rstrip to remove the \n
-            x = [(fname[i], fname[i+1]) for i in range(0, columns*2, 2)]
+            x = [(float(fname[i]), int(fname[i+1])) for i in range(0, columns*2, 2)]
             arr.append(x)
 
     configComp(arr)

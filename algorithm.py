@@ -112,8 +112,11 @@ def MinMax(PPMmap, conf, total_cost, co2_reduction, path):
 """
 def MinMax(PPMmap, conf):
     #[2, 3]
+    conf = num2CCS(conf)
     best = None
+    indexes = -1
     valids = ValidNodes(PPMmap)
+
     if len(conf) == 2:
         for i in range(len(valids)):
             for j in range(len(valids)):
@@ -126,7 +129,6 @@ def MinMax(PPMmap, conf):
                     t_co2 = co2 + co22
 
                     if best == None or best[1] < t_co2:
-                        print("replaced!", t_co2)
                         best = (t_cost, t_co2)
                         indexes = [(valids[i][0], valids[i][1], conf[0].name), (valids[j][0], valids[j][1], conf[1].name)]
 
@@ -146,7 +148,6 @@ def MinMax(PPMmap, conf):
                             t_co2 = co2 + co22 + co23
 
                             if best == None or best[1] < t_co2:
-                                print("replaced!", t_co2)
                                 best = (t_cost, t_co2)
                                 indexes = [(valids[i][0], valids[i][1], conf[0].name), (valids[j][0], valids[j][1], conf[1].name), (valids[k][0], valids[k][1], conf[2].name)]
 
@@ -227,7 +228,7 @@ def place_node(PPMmap, row, col, elem):
                 reduced_ppm += PPMmap[row+2][col-2][0] * elem.effective[4]
             if col + 2 < cols:
                 reduced_ppm += PPMmap[row+2][col + 2][0] * elem.effective[4]
-        if row + 1 >= 0:
+        if row + 1 < rows:
             if col - 3 >= 0:
                 reduced_ppm += PPMmap[row+1][col-3][0] * elem.effective[4]
             if col + 3 < cols:
@@ -301,7 +302,7 @@ def place_node(PPMmap, row, col, elem):
 
     reduced_ppm -= (elem.increasedPPM * elem.months)
 
-    PPMmap[row][col] = (PPM[row][col][0], 0)
+    PPMmap[row][col] = (PPMmap[row][col][0], 0)
 
     return reduced_ppm, elem.cost
 
@@ -320,19 +321,6 @@ def num2CCS(conf):
 
 #READ_FILE: filename -> 2D-array
 
-PPM = [[(1, 1) for j in range(6)]for i in range(8)]
-for r in PPM:
-    print(r)
-
-total_ppm_reduc = 0
-total_cost = 0
-List_of_best = []
-checked = []
-
-confCCS = num2CCS([2, 3, 3])
-cost, red, ind = MinMax(PPM, confCCS)
-
-print(cost, red, ind)
 
 
 """
