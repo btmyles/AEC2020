@@ -21,23 +21,18 @@ def openwindow(root, results):
     l = 0
     maximum = max(y)
     ind = y.index(maximum)
-    money = z.index(maximum)
     maxcity = x[ind]
 
 
     # Labels
-    result_window.l1 = tk.Label(result_window, text = "Cost")
     result_window.l2 = tk.Label(result_window, text = "CO2 Saved")
     result_window.l3 = tk.Label(result_window, text = "City")
-    result_window.l1.grid(row=0, column=0, sticky=W)
     result_window.l2.grid(row=1, column=0, sticky=W)
     result_window.l3.grid(row=2, column=0, sticky=W)
 
     # Data labels
-    result_window.d1 = tk.Label(result_window, text = money)
     result_window.d2 = tk.Label(result_window, text = maximum)
     result_window.d3 = tk.Label(result_window, text = maxcity)
-    result_window.d1.grid(row=0, column=2, sticky=W)
     result_window.d2.grid(row=1, column=2, sticky=W)
     result_window.d3.grid(row=2, column=2, sticky=W)
 
